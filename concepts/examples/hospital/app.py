@@ -27,8 +27,24 @@ def criar_tabela_pacientes(cursor):
     conexao.commit()
     print("Tabela 'pacientes' criada com sucesso!")
 
+# criar_tabela_pacientes(cursor)
 
-criar_tabela_pacientes(cursor)
+def criar_especidades_pacientes(cursor):
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS especialidades (
+        cidade VARCHAR(50) NOT NULL,
+        year INT,
+        temperatura FLOAT,
+        pacientes_id INT,
+        CONSTRAINT check_year CHECK (year >= 1900 AND year <= 2100),
+        CONSTRAINT check_temperatura CHECK (temperatura >= 0 AND temperatura <= 50),
+        PRIMARY KEY (cidade, year),
+        FOREIGN KEY (pacientes_id) REFERENCES pacientes(id)
+    )""")
+    conexao.commit()
+    print("Tabela 'especialidades' criada com sucesso!")
+
+criar_especidades_pacientes(cursor)
 
 conexao.commit()
 
