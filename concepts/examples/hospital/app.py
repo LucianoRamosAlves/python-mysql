@@ -56,6 +56,7 @@ def validar_nome(nome):
     elif "  " in nome:
         raise ValueError("Nome não deve conter múltiplos espaços consecutivos.")
     elif nome.lower() in ["admin", "root", "null"]:
+        print(f"Nome '{nome}' é um nome reservado. Por favor, escolha outro nome.")
         raise ValueError("Nome não pode ser um nome reservado.")
     elif nome == "":
         raise ValueError("Nome não pode ser vazio.")
@@ -64,10 +65,18 @@ def validar_nome(nome):
 
 
 def inserir_paciente(cursor, conexao, nome, idade, email):
-    validar_nome(nome)
-    cursor.execute("INSERT INTO pacientes (nome, idade, email) VALUES (%s, %s, %s)",
-    (nome, idade, email))
-    conexao.commit()
+    try:
+        validar_nome(nome)
+        cursor.execute("INSERT INTO pacientes (nome, idade, email) VALUES (%s, %s, %s)",
+        (nome, idade, email))
+        print(f"Paciente '{nome}' inserido com sucesso!")
+        conexao.commit()
+    except ValueError as e:
+        print(f"Erro ao inserir paciente: {e}")
+
+#inserir_paciente(cursor, conexao, "Maria Silva", 30, "maria.silva@example.com")
+#inserir_paciente(cursor, conexao, "João Souza", 45, "joao.souza@example.com")
+inserir_paciente(cursor, conexao, "admin", 28, "ana.oliveira@example.com")
 
 
 conexao.commit()
