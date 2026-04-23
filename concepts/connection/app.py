@@ -58,7 +58,7 @@ deletar_usuario(cursor, conexao, 8)
 conexao.commit()
 
 def listar_usuarios(cursor):
-    cursor.execute("SELECT * FROM usuarios")
+    cursor.execute("SELECT * FROM usuarios WHERE idade > 30")
     dados = cursor.fetchall()
     for linha in dados:
         print(linha)
