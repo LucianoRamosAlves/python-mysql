@@ -44,7 +44,31 @@ def criar_especidades_pacientes(cursor):
     conexao.commit()
     print("Tabela 'especialidades' criada com sucesso!")
 
-criar_especidades_pacientes(cursor)
+# criar_especidades_pacientes(cursor)
+
+def validar_nome(nome):
+    if not nome or len(nome) > 100:
+        raise ValueError("Nome deve ser preenchido e ter no máximo 100 caracteres.")
+    elif not nome.replace(" ", "").isalpha():
+        raise ValueError("Nome deve conter apenas letras e espaços.")
+    elif nome[0].isspace() or nome[-1].isspace():
+        raise ValueError("Nome não deve começar ou terminar com espaço.")
+    elif "  " in nome:
+        raise ValueError("Nome não deve conter múltiplos espaços consecutivos.")
+    elif nome.lower() in ["admin", "root", "null"]:
+        raise ValueError("Nome não pode ser um nome reservado.")
+    elif nome == "":
+        raise ValueError("Nome não pode ser vazio.")
+    
+
+
+
+def inserir_paciente(cursor, conexao, nome, idade, email):
+    validar_nome(nome)
+    cursor.execute("INSERT INTO pacientes (nome, idade, email) VALUES (%s, %s, %s)",
+    (nome, idade, email))
+    conexao.commit()
+
 
 conexao.commit()
 
