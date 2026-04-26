@@ -129,7 +129,7 @@ def inserir_especialidade(cursor, conexao, cidade, year, temperatura, pacientes_
         print(f"Erro ao inserir especialidade: {e}")
 
 #inserir_especialidade(cursor, conexao, "São Paulo", 2023, 25.5, 1)
-inserir_especialidade(cursor, conexao, "Rio de Janeiro", 2023, 30.0, 2)
+#inserir_especialidade(cursor, conexao, "Rio de Janeiro", 2023, 30.0, 2)
 
 conexao.commit()
 
