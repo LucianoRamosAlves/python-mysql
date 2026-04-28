@@ -8,9 +8,32 @@ def criar_banco(cursor): #! 6 sexto passo. Definir uma função criar_banco() qu
     conexao.commit() #! 8.1 passo. Confirmar a operação de criação do banco de dados usando conexao.commit(). Isso é necessário para garantir que as alterações sejam salvas no servidor MySQL.
     print("banco word criado com sucesso.")
 
-criar_banco(cursor) #! 8 oitavo passo. Chamar a função criar_banco() passando o cursor como argumento para criar o banco de dados "word". Isso executará o comando SQL para criar o banco e imprimirá a mensagem de sucesso.
-
+# criar_banco(cursor) #! 8 oitavo passo. Chamar a função criar_banco() passando o cursor como argumento para criar o banco de dados "word". Isso executará o comando SQL para criar o banco e imprimirá a mensagem de sucesso.
 conexao.database = "word" #! 9 nono passo. Selecionar o banco de dados "word" para que as próximas operações sejam realizadas dentro desse banco. Isso é feito atribuindo o nome do banco à propriedade database da conexão.
+
+
+def criar_tabela():
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS continentes (
+        continente_id INT AUTO_INCREMENT PRIMARY KEY,
+        continente_nome VARCHAR(20) NOT NULL,
+        populacao BIGINT NOT NULL
+    )
+    """)
+    conexao.commit()
+    print("Tabela 'continentes' criada com sucesso!")
+
+criar_tabela()
+
+
+
+
+
+
+
+
+
+
 
 cursor.close() #! 4 quarto passo. Fechar o cursor após criar o banco de dados, pois ele não é mais necessário para as próximas operações.
 conexao.close() #! 5 quinto passo. Fechar a conexão com o banco de dados para liberar recursos e evitar conexões desnecessárias.
