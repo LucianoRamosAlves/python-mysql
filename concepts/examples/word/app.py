@@ -1,3 +1,4 @@
+
 from db import conectar #! 1 primeiro passo. Importar a função conectar() do módulo db.py para estabelecer uma conexão com o banco de dados MySQL.
 
 conexao = conectar() #! 2 segundo passo. Chamar a função conectar() para criar uma conexão com o servidor MySQL e armazenar essa conexão na variável conexao.
@@ -38,14 +39,21 @@ def inserir_continente(cursor, conexao, nome, populacao):
 #inserir_continente(cursor, conexao, "Europa", 747636026)
 #inserir_continente(cursor, conexao, "Oceania", 43111704)
 
+def listar_continente_nomes(cursor):
+    cursor.execute("SELECT continente_nome FROM continentes")
+    nomes = cursor.fetchall()
+    for nome in nomes:
+        print(nome)
 
+# listar_continente_nomes(cursor)
+cont = input("digite")
+def listar_continente_populacao(cursor):
+    cursor.execute(f"SELECT populacao FROM continentes WHERE continente_nome = '{cont}' ")
+    population = cursor.fetchall()
+    print(f" essa é a populaççao da {cont}: {population}")
 
-
-
-
-
-
-
+# listar_continente_nomes(cursor)
+listar_continente_populacao(cursor)
 
 
 
