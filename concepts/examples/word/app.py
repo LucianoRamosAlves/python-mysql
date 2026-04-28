@@ -23,7 +23,21 @@ def criar_tabela():
     conexao.commit()
     print("Tabela 'continentes' criada com sucesso!")
 
-criar_tabela()
+# criar_tabela()
+
+def inserir_continente(cursor, conexao, nome, populacao):
+    cursor.execute("INSERT INTO continentes (continente_nome, populacao) VALUES (%s, %s)",
+    (nome, populacao))
+    conexao.commit()
+    print(f"Continente '{nome}' inserido com sucesso!")
+
+#inserir_continente(cursor, conexao, "África", 1340598147)
+#inserir_continente(cursor, conexao, "América do Norte", 592072212)
+#inserir_continente(cursor, conexao, "América do Sul", 430759766)
+#inserir_continente(cursor, conexao, "Ásia", 4641054787)
+#inserir_continente(cursor, conexao, "Europa", 747636026)
+#inserir_continente(cursor, conexao, "Oceania", 43111704)
+
 
 
 
