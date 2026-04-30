@@ -46,9 +46,9 @@ def listar_continente_nomes(cursor):
         print(nome)
 
 # listar_continente_nomes(cursor)
-cont = input("digite")
+cont = input("digite ")
 def listar_continente_populacao(cursor):
-    cursor.execute(f"SELECT populacao FROM continentes WHERE continente_nome = '{cont}' ")
+    cursor.execute(f"SELECT populacao FROM continentes WHERE continente_nome = %s", (cont,))
     population = cursor.fetchall()
     print(f" essa é a populaççao da {cont}: {population}")
 
